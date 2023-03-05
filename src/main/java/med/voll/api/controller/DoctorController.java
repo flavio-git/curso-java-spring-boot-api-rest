@@ -6,11 +6,10 @@ import med.voll.api.doctor.DoctorListRecord;
 import med.voll.api.doctor.DoctorRecord;
 import med.voll.api.doctor.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Comparator;
-import java.util.List;
 
 @RestController
 @RequestMapping("/doctor")
@@ -26,13 +25,10 @@ public class DoctorController {
     }
 
     @GetMapping
-    public List<DoctorListRecord> gettingDoctorsList(){
+    public Page<DoctorListRecord> gettingDoctorsList(Pageable pageable){
         return doctorRepository
-                .findAll()
-                .stream()
-                .map(DoctorListRecord::new)
-                .sorted(Comparator.comparing(DoctorListRecord::name))
-                .toList();
+                .findAll(pageable)
+                .map(DoctorListRecord::new);
     }
 
 }
