@@ -29,7 +29,7 @@ public class DoctorController {
     @GetMapping
     public Page<DoctorListRecord> gettingDoctorsList(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable){
         return doctorRepository
-                .findAll(pageable)
+                .findAllByActiveTrue(pageable)
                 .map(DoctorListRecord::new);
     }
 
@@ -39,6 +39,14 @@ public class DoctorController {
     public void updateDoctor(@RequestBody @Valid DoctorUpdateRecord data){
         var doctor = doctorRepository.getReferenceById(data.id());
         doctor.updateValues(data);
+    }
+
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void deleteDoctor(@PathVariable Long id){
+        var doctor = doctorRepository.getReferenceById(id);
+        doctor.inactiveDoctor();
     }
 
 }

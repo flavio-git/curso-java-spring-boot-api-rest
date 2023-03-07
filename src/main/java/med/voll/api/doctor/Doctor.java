@@ -30,6 +30,7 @@ public class Doctor {
     private Specialty specialty;
     @Embedded
     private Address address;
+    private boolean active;
 
     public Doctor(DoctorRecord doctor) {
         this.name = doctor.name();
@@ -38,6 +39,7 @@ public class Doctor {
         this.crm = doctor.crm();
         this.address = new Address(doctor.address());
         this.specialty = doctor.specialty();
+        this.active = true;
     }
 
     public void updateValues(DoctorUpdateRecord data) {
@@ -50,5 +52,9 @@ public class Doctor {
         if (data.addressRecord() != null) {
             this.address.updateAddress(data.addressRecord());
         }
+    }
+
+    public void inactiveDoctor() {
+        this.active = false;
     }
 }
