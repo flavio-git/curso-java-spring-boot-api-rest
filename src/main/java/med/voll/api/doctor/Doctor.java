@@ -1,6 +1,6 @@
 package med.voll.api.doctor;
 
-// This class is a JPA (Java Persistence API) entity
+// This class is a JPA (Java Persistence API) Entity
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

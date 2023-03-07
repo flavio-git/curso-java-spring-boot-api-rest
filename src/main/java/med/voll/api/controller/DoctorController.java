@@ -8,6 +8,7 @@ import med.voll.api.doctor.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class DoctorController {
     }
 
     @GetMapping
-    public Page<DoctorListRecord> gettingDoctorsList(Pageable pageable){
+    public Page<DoctorListRecord> gettingDoctorsList(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable){
         return doctorRepository
                 .findAll(pageable)
                 .map(DoctorListRecord::new);
