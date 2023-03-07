@@ -1,6 +1,7 @@
 package med.voll.api.address;
 
 import jakarta.persistence.Embeddable;
+import med.voll.api.record.address.AddressRecord;
 
 @Embeddable
 public class Address {
@@ -25,5 +26,26 @@ public class Address {
 
     public Address() {
 
+    }
+
+    public void updateAddress(AddressRecord address) {
+        if (address.street() != null){
+            this.street = address.street();
+        }
+        if (address.number() != null){
+            this.number = address.number();
+        }
+        if (address.complement() != null){
+            this.complement = address.complement();
+        }
+        if (address.state() != null){
+            this.state = address.state();
+        }
+        if (address.city() != null){
+            this.city = address.city();
+        }
+        if(address.cep() != null){
+            this.cep = address.cep();
+        }
     }
 }

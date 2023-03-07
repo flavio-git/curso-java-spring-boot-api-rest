@@ -1,10 +1,10 @@
-package med.voll.api.patient;
+package med.voll.api.record.patient;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import med.voll.api.address.AddressRecord;
+import med.voll.api.record.address.AddressRecord;
 
 public record PatientRecord(
         @NotBlank

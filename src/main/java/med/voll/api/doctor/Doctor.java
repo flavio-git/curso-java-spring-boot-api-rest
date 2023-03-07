@@ -8,6 +8,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.address.Address;
+import med.voll.api.record.doctor.DoctorRecord;
+import med.voll.api.record.doctor.DoctorUpdateRecord;
 
 @Table(name = "doctors")
 @Entity(name = "Doctor")
@@ -36,5 +38,17 @@ public class Doctor {
         this.crm = doctor.crm();
         this.address = new Address(doctor.address());
         this.specialty = doctor.specialty();
+    }
+
+    public void updateValues(DoctorUpdateRecord data) {
+        if (data.name() != null) {
+            this.name = data.name();
+        }
+        if (data.email() != null) {
+            this.email = data.email();
+        }
+        if (data.addressRecord() != null) {
+            this.address.updateAddress(data.addressRecord());
+        }
     }
 }
